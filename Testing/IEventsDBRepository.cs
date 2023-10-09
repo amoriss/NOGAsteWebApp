@@ -1,23 +1,32 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Testing.Models;
+using NOGAsteWebAPP.Models;
 
 
-namespace Testing
+namespace NOGAsteWebAPP
 {
     //Step #8
     public interface IEventsDBRepository
     {
 
-        //Stubbed out method
-        public IEnumerable<EventsDB> GetAllEvents();
+        //Stubbed out methods
+        //-----------------------
+        public IEnumerable<EventsDBModel> GetAllEvents();
+
+        //-----------------------
+        public EventsDBModel GetEvent(int id);
+
+        //-----------------------
+        public void UpdateEventInDB(EventsDBModel updEvent);
+
+        //-----------------------
+        public IEnumerable<EventsDBModel> GetMaliciousEvents();
 
 
-        public IEnumerable<EventsDB> GetMaliciousEvents();
-
-
-
+        //-----------------------
+        //public void DeleteProduct(Product product);
 
     }//Interface
 

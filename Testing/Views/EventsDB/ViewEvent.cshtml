@@ -1,0 +1,31 @@
+﻿@model NOGAsteWebAPP.Models.EventsDBModel
+
+<h3>@Model.KeyID Information</h3>
+
+<table class="table">
+    
+        <tr>
+            <th>KeyID</th>
+            <th>EventID</th>
+            <th>TimeCreated</th>
+            <th>UserID</th>
+            <th>MachineName</th>
+            <th>ThreatEval</th>
+            <th>ActionReqd</th>
+
+        </tr>
+        <tr>
+            <td>@Model.KeyID</td>
+            <td>@Model.EventID</td>
+            <td>@Model.TimeCreated</td>
+            <td>@Model.UserID</td>
+            <td>@Model.MachineName</td>
+            <td>@Model.ThreatEval</td>
+            <td>@Model.ActionReqd</td>
+        </tr>
+
+</table>
+
+<div style="display: block">
+<a href="/EventsDB/UpdateEvent/@Model.KeyID">Update this Event</a>
+</div>

@@ -1,6 +1,6 @@
 using System;
 
-namespace Testing.Models
+namespace NOGAsteWebAPP.Models
 {
     public class ErrorViewModel
     {

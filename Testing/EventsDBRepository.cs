@@ -1,10 +1,11 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Logging;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using Testing.Models;
+using NOGAsteWebAPP.Models;
 
-namespace Testing
+namespace NOGAsteWebAPP
 {
     //Step #9
     public class EventsDBRepository : IEventsDBRepository
@@ -16,26 +17,45 @@ namespace Testing
         //Constructor
         public EventsDBRepository(IDbConnection conn)
         {
-
-            _conn = conn;
-
+           _conn = conn;
         }
+
+
+        public void DeleteEvents(EventsDBModel tgtEvent)
+        {
+           _conn.Execute("DELETE FROM securityLogs.events " +
+                " WHERE ThreatEval = @id;", new { id = tgtEvent });
+        }
+        //Method
 
 
         //Method
-        public IEnumerable<EventsDB> GetAllEvents()
+        public IEnumerable<EventsDBModel> GetAllEvents()
         {
-            return _conn.Query<EventsDB>("SELECT * from events;");
+           return _conn.Query<EventsDBModel>("SELECT * from securityLogs.events;");
         }
 
-        public IEnumerable<EventsDB> GetMaliciousEvents()
+        public EventsDBModel GetEvent(int tgtKeyID)
         {
-            return _conn.Query<EventsDB>("SELECT * FROM securityLogs.events WHERE " +
+           return _conn.QuerySingleOrDefault<EventsDBModel>("SELECT KeyID FROM " +
+                " securityLogs.events WHERE KeyID = @KeyID", new { KeyID = tgtKeyID });
+        }
+
+        public IEnumerable<EventsDBModel> GetMaliciousEvents()
+        {
+           return _conn.Query<EventsDBModel>("SELECT * FROM securityLogs.events WHERE " +
                                          " CommandRun  LIKE '%powershell%' OR " +
                                          " ProcessInfo LIKE '%powershell%' OR " + 
                                          " ObjName     LIKE '%powershell%' OR " +
                                          " AppPath     LIKE '%powershell%' ;  "
                                          );
+        }
+
+
+        public void UpdateEventInDB(EventsDBModel keyIdOfEventToBeUpdated)
+        {
+            _conn.Execute("UPDATE events SET securityLogs.ThreatEval = @threatEval WHERE KeyID = @id",
+             new { threatEval = keyIdOfEventToBeUpdated.ThreatEval, id = keyIdOfEventToBeUpdated.KeyID });
         }
 
 

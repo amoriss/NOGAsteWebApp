@@ -1,11 +1,12 @@
 ﻿
 
 
-@model IEnumerable<EventsDB>
+@model IEnumerable<NOGAsteWebAPP.Models.EventsDBModel>
 
 <h2>EventsDB</h2>
 <table class="table">
     <tr>
+        <th>KeyID</th>
         <th>EventID</th>
         <th>TimeCreated</th>
         <th>EventMsg</th>
@@ -26,11 +27,16 @@
         <th>Status</th>
         <th>SubStatus</th>
         <th>ReasonEvnt</th>
+        <th>ThreatEval</th>
+        <th>ActionReqd</th>
+
     </tr>
 
     @foreach (var eventsDB in @Model)
     {
         <tr>
+            <td><a href=/EventsDB/ViewEvent/@eventsDB.KeyID>@eventsDB.KeyID</a></td>
+            <td>@eventsDB.KeyID</td>
             <td>@eventsDB.EventID</td>
             <td>@eventsDB.TimeCreated</td>
             <td>@eventsDB.EventMsg</td>
@@ -51,6 +57,8 @@
             <td>@eventsDB.Status</td>
             <td>@eventsDB.SubStatus</td>
             <td>@eventsDB.ReasonEvnt</td>
+            <td>@eventsDB.ThreatEval</td>
+            <td>@eventsDB.ActionReqd</td>
         </tr>
     }
 

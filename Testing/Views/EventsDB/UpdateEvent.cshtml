@@ -1,0 +1,10 @@
+﻿@model NOGAsteWebAPP.Models.EventsDBModel
+
+<h2>Update @Model.ThreatEval</h2>
+
+@using (Html.BeginForm("UpdateEventToDatabase", "Event", "Post"))
+{
+    <input asp-for="ThreatEval" type="hidden" value="@Model.ThreatEval" />
+
+    <input type="submit" value="Update Event" class="btn btn-primary" />
+}
