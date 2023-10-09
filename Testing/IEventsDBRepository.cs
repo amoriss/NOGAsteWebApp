@@ -14,6 +14,10 @@ namespace Testing
         public IEnumerable<EventsDB> GetAllEvents();
 
 
+        public IEnumerable<EventsDB> GetMaliciousEvents();
+
+
+
 
     }//Interface
 

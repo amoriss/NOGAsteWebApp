@@ -31,6 +31,8 @@
     @foreach (var eventsDB in @Model)
     {
         <tr>
+            <td>@eventsDB.EventID</td>
+            <td>@eventsDB.TimeCreated</td>
             <td>@eventsDB.EventMsg</td>
             <td>@eventsDB.LogonType</td>
             <td>@eventsDB.ElevToken</td>

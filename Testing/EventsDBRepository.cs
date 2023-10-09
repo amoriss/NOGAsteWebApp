@@ -22,12 +22,22 @@ namespace Testing
         }
 
 
- 
-
         //Method
         public IEnumerable<EventsDB> GetAllEvents()
         {
             return _conn.Query<EventsDB>("SELECT * from events;");
         }
+
+        public IEnumerable<EventsDB> GetMaliciousEvents()
+        {
+            return _conn.Query<EventsDB>("SELECT * FROM securityLogs.events WHERE " +
+                                         " CommandRun  LIKE '%powershell%' OR " +
+                                         " ProcessInfo LIKE '%powershell%' OR " + 
+                                         " ObjName     LIKE '%powershell%' OR " +
+                                         " AppPath     LIKE '%powershell%' ;  "
+                                         );
+        }
+
+
     }//class
 }//namespace

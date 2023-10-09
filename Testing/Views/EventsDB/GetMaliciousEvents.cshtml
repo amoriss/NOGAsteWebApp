@@ -1,0 +1,30 @@
+﻿@model EventsDB
+
+
+<h3>@Model.EventID Information</h3>
+
+<table class="table">
+    <tr>
+        <th>EventID</th>
+        <th>TimeCreated</th>
+        <th>UserID</th>
+        <th>MachineName</th>
+        <th>CommandRun</th>
+        <th>ProcessInfo</th>
+        <th>ObjName</th>
+        <th>AppPath</th>
+    </tr>
+    <tr>
+        <td>@Model.EventID</td>
+        <td>@Model.TimeCreated</td>
+        <td>@Model.UserID</td>
+        <td>@Model.MachineName</td>
+        <td>@Model.CommandRun</td>
+        <td>@Model.ProcessInfo</td>
+        <td>@Model.ObjName</td>
+        <td>@Model.AppPath</td>
+    </tr>
+</table>
+
+
+}
