@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MySql.Data.MySqlClient;
 using System.Data;
-using NOGAsteWebAPP;
+using NOGAsteWebApp;
 
 var builder = WebApplication.CreateBuilder(args);
 

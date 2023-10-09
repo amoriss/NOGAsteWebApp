@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NOGAsteWebAPP.Models;
+using NOGAsteWebApp.Models;
 
-namespace NOGAsteWebAPP.Controllers
+namespace NOGAsteWebApp.Controllers
 {
     public class EventsDBController : Controller
     {
@@ -37,10 +37,10 @@ namespace NOGAsteWebAPP.Controllers
         //---------------------------------
         public IActionResult ViewEvent(int id) //creates the view
         {
-            EventsDBModel eventInfo = repo.GetEvent(id); //gets the data
-            //int keyID = eventInfo.KeyID;
+            EventsDBModel eventsDBModelObj = repo.GetEvent(id); //returns an "EventsDBModel" object
+            //int keyID = eventsDBModelObj.KeyID;
             //return View(keyID);
-            return View(eventInfo); 
+            return View(eventsDBModelObj); 
         }//ViewEvent
 
 

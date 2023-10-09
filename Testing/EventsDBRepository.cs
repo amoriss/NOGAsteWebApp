@@ -3,9 +3,9 @@ using Microsoft.Extensions.Logging;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using NOGAsteWebAPP.Models;
+using NOGAsteWebApp.Models;
 
-namespace NOGAsteWebAPP
+namespace NOGAsteWebApp
 {
     //Step #9
     public class EventsDBRepository : IEventsDBRepository
@@ -20,16 +20,16 @@ namespace NOGAsteWebAPP
            _conn = conn;
         }
 
-
+        //-----------------------
         public void DeleteEvents(EventsDBModel tgtEvent)
         {
            _conn.Execute("DELETE FROM securityLogs.events " +
                 " WHERE ThreatEval = @id;", new { id = tgtEvent });
         }
-        //Method
 
 
-        //Method
+
+        //-----------------------
         public IEnumerable<EventsDBModel> GetAllEvents()
         {
            return _conn.Query<EventsDBModel>("SELECT * from securityLogs.events;");
@@ -37,10 +37,13 @@ namespace NOGAsteWebAPP
 
         public EventsDBModel GetEvent(int tgtKeyID)
         {
-           return _conn.QuerySingleOrDefault<EventsDBModel>("SELECT KeyID FROM " +
+           //returns an "EventsDBModel" object
+           return _conn.QuerySingleOrDefault<EventsDBModel>("SELECT " +
+               " KeyID,EventID,TimeCreated,UserID,ThreatEval,ActionReqd FROM " +
                 " securityLogs.events WHERE KeyID = @KeyID", new { KeyID = tgtKeyID });
         }
 
+        //-----------------------
         public IEnumerable<EventsDBModel> GetMaliciousEvents()
         {
            return _conn.Query<EventsDBModel>("SELECT * FROM securityLogs.events WHERE " +
@@ -51,7 +54,7 @@ namespace NOGAsteWebAPP
                                          );
         }
 
-
+        //-----------------------
         public void UpdateEventInDB(EventsDBModel keyIdOfEventToBeUpdated)
         {
             _conn.Execute("UPDATE events SET securityLogs.ThreatEval = @threatEval WHERE KeyID = @id",

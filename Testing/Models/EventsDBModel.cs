@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
-namespace NOGAsteWebAPP.Models
+namespace NOGAsteWebApp.Models
 {
     public class EventsDBModel
     {

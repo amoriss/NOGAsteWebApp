@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using NOGAsteWebAPP.Models;
+using NOGAsteWebApp.Models;
 
 
-namespace NOGAsteWebAPP
+namespace NOGAsteWebApp
 {
     //Step #8
     public interface IEventsDBRepository
