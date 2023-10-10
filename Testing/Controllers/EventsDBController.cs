@@ -26,19 +26,14 @@ namespace NOGAsteWebApp.Controllers
             return View(eventList);
         }//GetAllEvents
 
-        //---------------------------------
-        public IActionResult GetProhibitedEvents()  //creates the view
-        {
-           var malEvents = repo.GetMaliciousEvents(); //gets the data
-            return View(malEvents);
-        }//GetProhibitedEvents
+
 
 
         //---------------------------------
         public IActionResult ViewEvent(int id) //creates the view
         {
             EventsDBModel eventsDBModelObj = repo.GetEvent(id); //returns an "EventsDBModel" object
-            //int keyID = eventsDBModelObj.KeyID;
+            //int keyID = eventsDBModelObj.fingerPrintID;
             //return View(keyID);
             return View(eventsDBModelObj); 
         }//ViewEvent
@@ -47,24 +42,48 @@ namespace NOGAsteWebApp.Controllers
         //---------------------------------
         public IActionResult UpdateEventToDatabase(EventsDBModel updEventToDB)
         {
-            repo.UpdateEventInDB(updEventToDB);
+            repo.UpdateEvent(updEventToDB);
 
             return RedirectToAction("ViewEvent", new { id = updEventToDB.KeyID });
         }//UpdateEventToDatabase
 
 
         //---------------------------------
-        public IActionResult UpdateEvent(int KeyID) //creates the view
+        public IActionResult UpdateEvent(int fingerPrintID) //creates the view
         {
-            EventsDBModel updEvent = repo.GetEvent(KeyID); //get the data
+            EventsDBModel updEvent = repo.GetEvent(fingerPrintID); //Blows up here
 
-            if (updEvent == null)
-            {
-                return View("EventNotFound"); //creates error response view
-            }
+            //if (updEvent == null)
+            //{
+            //    return View("EventNotFound"); //creates error response view
+            //}
             return View(updEvent);
-         }//UpdateEventInDB
-    
+         }//UpdateEvent
+
+
+        //---------------------------------
+        //InsertProduct() NOT USED
+
+
+
+        //---------------------------------
+        //InsertProductToDatabase() NOT USED
+
+
+        //public IActionResult DeleteEvents(EventsDBModel tgtEventKeyID)
+        //{
+        //    repo.DeleteEvents(tgtEventKeyID );
+        //    return RedirectToAction("Index");
+        //}
+
+
+
+        //---------------------------------
+        public IActionResult GetMaliciousEvents()  //creates the view
+        {
+            var malEvents = repo.GetMaliciousEvents(); //gets the data
+            return View(malEvents);
+        }//GetMaliciousEvents
 
 
     }//class

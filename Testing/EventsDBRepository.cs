@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using NOGAsteWebApp.Models;
+using MySql.Data.MySqlClient;
 
 namespace NOGAsteWebApp
 {
@@ -21,11 +22,15 @@ namespace NOGAsteWebApp
         }
 
         //-----------------------
-        public void DeleteEvents(EventsDBModel tgtEvent)
-        {
-           _conn.Execute("DELETE FROM securityLogs.events " +
-                " WHERE ThreatEval = @id;", new { id = tgtEvent });
-        }
+        //AssignCategory - NOT USED
+
+
+        //-----------------------
+        //public void DeleteEvents(EventsDBModel tgtEventKeyID)
+        //{
+        //   _conn.Execute("DELETE FROM securityLogs.events " +
+        //        " WHERE ThreatEval = @id;", new { id = tgtEventKeyID });
+        //}
 
 
 
@@ -37,28 +42,55 @@ namespace NOGAsteWebApp
 
         public EventsDBModel GetEvent(int tgtKeyID)
         {
-           //returns an "EventsDBModel" object
-           return _conn.QuerySingleOrDefault<EventsDBModel>("SELECT " +
-               " KeyID,EventID,TimeCreated,UserID,ThreatEval,ActionReqd FROM " +
-                " securityLogs.events WHERE KeyID = @KeyID", new { KeyID = tgtKeyID });
+            //returns an "EventsDBModel" object
+                //return _conn.QuerySingle<Product>("SELECT * FROM PRODUCTS WHERE PRODUCTID = @id", new { id = id });
+            return _conn.QuerySingle<EventsDBModel>("SELECT * FROM events   WHERE KeyID = @perpID", new {perpID = tgtKeyID });
+        }
+
+        //public EventsDBModel GetEvent(int tgtKeyID)
+        //{
+        //  //returns an "EventsDBModel" object
+        //  return _conn.QuerySingle<EventsDBModel>("SELECT " +
+        //     " KeyID,EventID,TimeCreated,UserID,ThreatEval,ActionReqd FROM " +
+        //     " securityLogs.events WHERE KeyID = @perpID", new {perpID = tgtKeyID });
+        //}
+
+
+        //------------------------
+        //InsertProduct - NOT USED
+
+
+        //------------------------
+        //GetCategories - NOT USED
+
+
+
+
+
+
+        //-----------------------
+        public void UpdateEvent(EventsDBModel keyIdOfEventToBeUpdated)
+        {
+            //_conn.Execute("UPDATE products SET Name = @name, Price = @price WHERE ProductID = @id",
+            //     new { name = product.Name, price = product.Price, id = product.ProductID
+            //});
+            //_conn.Execute("UPDATE securityLogs.events SET securityLogs.ThreatEval = @threatEval WHERE KeyID = @id",
+            // new { threatEval = keyIdOfEventToBeUpdated.ThreatEval, id = keyIdOfEventToBeUpdated.KeyID });
+            _conn.Execute("UPDATE securityLogs.events SET securityLogs.ThreatEval = @threatEval WHERE KeyID = @id",
+            new { threatEval = keyIdOfEventToBeUpdated.ThreatEval });
         }
 
         //-----------------------
         public IEnumerable<EventsDBModel> GetMaliciousEvents()
         {
-           return _conn.Query<EventsDBModel>("SELECT * FROM securityLogs.events WHERE " +
-                                         " CommandRun  LIKE '%powershell%' OR " +
-                                         " ProcessInfo LIKE '%powershell%' OR " + 
-                                         " ObjName     LIKE '%powershell%' OR " +
-                                         " AppPath     LIKE '%powershell%' ;  "
-                                         );
-        }
-
-        //-----------------------
-        public void UpdateEventInDB(EventsDBModel keyIdOfEventToBeUpdated)
-        {
-            _conn.Execute("UPDATE events SET securityLogs.ThreatEval = @threatEval WHERE KeyID = @id",
-             new { threatEval = keyIdOfEventToBeUpdated.ThreatEval, id = keyIdOfEventToBeUpdated.KeyID });
+            return _conn.Query<EventsDBModel>("SELECT " +
+                " KeyID,EventID,UserID,CommandRun,ProcessInfo,ObjName,AppPath " +
+                " FROM securityLogs.events WHERE " +
+                " CommandRun  LIKE '%powershell%' OR " +
+                " ProcessInfo LIKE '%powershell%' OR " +
+                " ObjName     LIKE '%powershell%' OR " +
+                " AppPath     LIKE '%powershell%' ;  "
+                 );
         }
 
 

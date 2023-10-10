@@ -2,9 +2,12 @@
 
 <h2>Update @Model.ThreatEval</h2>
 
-@using (Html.BeginForm("UpdateEventToDatabase", "Event", "Post"))
+@using (Html.BeginForm("UpdateEventToDatabase", "EventsDBModel", "Post"))
 {
-    <input asp-for="ThreatEval" type="hidden" value="@Model.ThreatEval" />
+    <input asp-for="KeyID" type="hidden" value="@Model.KeyID" />
+
+    <label asp-for="ThreatEval" class="control-label">ThreatEval</label>
+    <input type="text" name="ThreatEval" class="form-control" value="@Model.ThreatEval" />
 
     <input type="submit" value="Update Event" class="btn btn-primary" />
 }

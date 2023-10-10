@@ -19,7 +19,7 @@ namespace NOGAsteWebApp
         public EventsDBModel GetEvent(int id);
 
         //-----------------------
-        public void UpdateEventInDB(EventsDBModel updEvent);
+        public void UpdateEvent(EventsDBModel updEvent);
 
         //-----------------------
         public IEnumerable<EventsDBModel> GetMaliciousEvents();
